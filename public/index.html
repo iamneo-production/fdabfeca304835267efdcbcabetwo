@@ -1,0 +1,682 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>tic_tac_toe</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- link the style.css and app.js files -->
+
+  <script src="app.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Enter your code here -->
+
+  <h1 id="header">Tic Tac Toe</h1>
+
+  <div class="box">
+
+    <div class="row">
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <br>
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <br>
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <div class="result-container">
+
+       <p class="result"name="result"></p>
+
+      </div>
+
+    </div>
+
+     <button id="reset">Reset</button>
+
+  </div>
+
+</body>
+
+</html>
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+[22:14] KONDAPALLI PRABHU KUMAR 21BCE9424
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>tic_tac_toe</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- link the style.css and app.js files -->
+
+  <script src="app.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Enter your code here -->
+
+  <h1 id="header">Tic Tac Toe</h1>
+
+  <div class="box">
+
+    <div class="row">
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <br>
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <br>
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <input class="btn"></input>
+
+      <div class="result-container">
+
+       <p class="result"name="result"></p>
+
+      </div>
+
+    </div>
+
+     <button id="reset">Reset</button>
+
+  </div>
+
+</body>
+
+</html>
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+@import url("https://fonts.googleapis.com/css2?family=Radio+Canada:wght@400;500;600;700&display=swap");
+
+ 
+
+body {
+
+    background-image: url("https://cdn.pixabay.com/photo/2018/03/17/19/36/connection-3234929_1280.jpg");
+
+    background-size: cover;
+
+    background-repeat: no-repeat;
+
+    background-position: center center;
+
+    font-family: "Radio Canada", sans-serif;
+
+  }
+
+  
+
+/* Enter your styling here */
+
+#header{
+
+  text-align: center;
+
+  color:white;
+
+  font-size: 50px;
+
+  text-shadow:azure;
+
+}
+
+.box{
+
+  display:flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 35px;
+
+}
+
+.row{
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+.btn{
+
+  border: 1px solid;
+
+  border-radius:10px;
+
+  height:75px;
+
+  width: 75px;
+
+  text-align: center;
+
+  font-size: 50px;
+
+  font-weight: 500;
+
+}
+
+.btn:hover{
+
+  background-color: rgba(255,255,255,0.9);
+
+  cursor:pointer;
+
+}
+
+.btn.enabled{
+
+  background-color: rgba(255,255,255,0.8);
+
+  color:#333;
+
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+
+  transition: background-color 0.3s,color 0.3s,transform 0.2s,cursor 0.2s;
+
+  cursor:pointer;
+
+}
+
+.btn.disabled{
+
+  background-color: rgba(0,0,0,0.1);
+
+  color:#000;
+
+  cursor:not-allowed;
+
+  pointer-events: none;
+
+}
+
+.result-container{
+
+  background-color: rgba(255,255,255,0.9);
+
+  border:2px solid #000;
+
+  max-width: 200px;
+
+  margin:0 auto;
+
+  text-align: center;
+
+  padding:10px;
+
+}
+
+.result{
+
+  text-align: center;
+
+  color:white;
+
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+
+  font-size:25px;
+
+}
+
+#reset{
+
+  text-align: center;
+
+  border: 1px solid #000000;
+
+  cursor:pointer;
+
+  color:#000000;
+
+  background-color: transparent;
+
+  transition: background-color 0.3s,color 0.3s;
+
+}
+
+#reset:hover{
+
+  background-color: #000000;
+
+  color:#ffffff;
+
+}
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+// Initial game state
+
+let cells = ['', '', '', '', '', '', '', '', ''];
+
+let currentPlayer = 'X';
+
+let result = document.querySelector('.result');
+
+let btns = document.querySelectorAll('.btn');
+
+let conditions = [
+
+    [0, 1, 2],
+
+    [3, 4, 5],
+
+    [6, 7, 8],
+
+    [0, 3, 6],
+
+    [1, 4, 7],
+
+    [2, 5, 8],
+
+    [0, 4, 8],
+
+    [2, 4, 6]
+
+];
+
+ 
+
+// Function to handle player moves
+
+const ticTacToe = (element, index) => {
+
+    // Your game logic here
+
+       // Check if the clicked cell is already occupied or if the game is already won
+
+    if (cells[index] !== '' || result.textContent !== '') {
+
+        return;
+
+    }
+
+ 
+
+    // Update the current cell with the current player's symbol
+
+    cells[index] = currentPlayer;
+
+    element.textContent = currentPlayer;
+
+ 
+
+    // Check for winning conditions
+
+    for (const condition of conditions) {
+
+        const [a, b, c] = condition;
+
+        if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
+
+            // Update the 'result' element with the winner
+
+            result.textContent = `${currentPlayer} wins!`;
+
+ 
+
+            // Disable all buttons after a win
+
+            btns.forEach((btn) => btn.disabled = true);
+
+            return;
+
+        }
+
+    }
+
+        // Check for a draw (all cells filled)
+
+    if (!cells.includes('')) {
+
+        result.textContent = 'It\'s a draw!';
+
+        return;
+
+    }
+
+    // Toggle the current player
+
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+ 
+
+    // Your code to display the current player's turn
+
+    result.textContent = `Current player: ${currentPlayer}`;
+
+};
+
+ 
+
+    /*
+
+    **Part 2: Reset Function (Add your code here)**
+
+ 
+
+    1. Implement a new function that resets the game to its initial state.
+
+    2. Ensure the 'cells', 'btns', and 'currentPlayer' variables are reset.
+
+    3. Update the 'result' element to indicate the current player's turn.
+
+    4. Re-enable all buttons for a new game.
+
+    */
+
+ 
+
+// Function to reset the game
+
+const resetGame = () => {
+
+    // Your code to reset the game state
+
+    // ...
+
+    cells = ['', '', '', '', '', '', '', '', ''];
+
+    currentPlayer = 'X';
+
+    result.textContent = '';
+
+    // Your code to re-enable buttons
+
+    btns.forEach((btn) => {
+
+        btn.textContent = '';
+
+        btn.disabled = false;
+
+    });
+
+};
+
+ 
+
+btns.forEach((btn, i) => {
+
+    btn.addEventListener('click', () => ticTacToe(btn, i));
+
+});
+
+ 
+
+document.querySelector('#reset').addEventListener('click', resetGame);
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+// Initial game state
+
+let cells = ['', '', '', '', '', '', '', '', ''];
+
+let currentPlayer = 'X';
+
+let result = document.querySelector('.result');
+
+let btns = document.querySelectorAll('.btn');
+
+let conditions = [
+
+    [0, 1, 2],
+
+    [3, 4, 5],
+
+    [6, 7, 8],
+
+    [0, 3, 6],
+
+    [1, 4, 7],
+
+    [2, 5, 8],
+
+    [0, 4, 8],
+
+    [2, 4, 6]
+
+];
+
+ 
+
+// Function to handle player moves
+
+const ticTacToe = (element, index) => {
+
+    // Your game logic here
+
+       // Check if the clicked cell is already occupied or if the game is already won
+
+    if (cells[index] !== '' || result.textContent !== '') {
+
+        return;
+
+    }
+
+ 
+
+    // Update the current cell with the current player's symbol
+
+    cells[index] = currentPlayer;
+
+    element.textContent = currentPlayer;
+
+ 
+
+    // Check for winning conditions
+
+    for (const condition of conditions) {
+
+        const [a, b, c] = condition;
+
+        if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
+
+            // Update the 'result' element with the winner
+
+            result.textContent = `${currentPlayer} wins!`;
+
+ 
+
+            // Disable all buttons after a win
+
+            btns.forEach((btn) => btn.disabled = true);
+
+            return;
+
+        }
+
+    }
+
+        // Check for a draw (all cells filled)
+
+    if (!cells.includes('')) {
+
+        result.textContent = 'It\'s a draw!';
+
+        return;
+
+    }
+
+    // Toggle the current player
+
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+ 
+
+    // Your code to display the current player's turn
+
+    result.textContent = `Current player: ${currentPlayer}`;
+
+};
+
+ 
+
+    /*
+
+    **Part 2: Reset Function (Add your code here)**
+
+ 
+
+    1. Implement a new function that resets the game to its initial state.
+
+    2. Ensure the 'cells', 'btns', and 'currentPlayer' variables are reset.
+
+    3. Update the 'result' element to indicate the current player's turn.
+
+    4. Re-enable all buttons for a new game.
+
+    */
+
+ 
+
+// Function to reset the game
+
+const resetGame = () => {
+
+    // Your code to reset the game state
+
+    // ...
+
+    cells = ['', '', '', '', '', '', '', '', ''];
+
+    currentPlayer = 'X';
+
+    result.textContent = '';
+
+    // Your code to re-enable buttons
+
+    btns.forEach((btn) => {
+
+        btn.textContent = '';
+
+        btn.disabled = false;
+
+    });
+
+};
+
+ 
+
+btns.forEach((btn, i) => {
+
+    btn.addEventListener('click', () => ticTacToe(btn, i));
+
+});
+
+ 
+
+document.querySelector('#reset').addEventListener('click', resetGame);
